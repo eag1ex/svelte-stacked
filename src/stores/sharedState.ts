@@ -7,7 +7,6 @@ export const sharedState = writable<SharedState>({
 	data: null
 });
 
-// Function to update the shared state
 export function setSharedState(newState: Partial<SharedState>) {
 	sharedState.update((state) => ({ ...state, ...newState }));
 }

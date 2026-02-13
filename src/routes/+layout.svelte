@@ -71,7 +71,9 @@
 		<Tabs.Indicator class="h-1 bg-blue-500" />
 	</Tabs>
 
-	<slot></slot>
+	<div class="mx-auto w-full">
+		<slot></slot>
+	</div>
 
 	<footer class="mt-6 text-center text-sm text-gray-500">
 		<p>&copy; 2024 My App</p>

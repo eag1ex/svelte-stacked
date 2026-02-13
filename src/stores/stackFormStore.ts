@@ -3,9 +3,15 @@ import { stacksMockData } from '@/data/index';
 
 export const stackFormStore = writable(stacksMockData);
 
-export const updateStackState = (id, updatedCard) => {
+export const updateStackState = (id, updateStack) => {
 	stackFormStore.update((stacks) => {
-		return stacks.map((stack) => (stack.id === id ? { ...stack, ...updatedCard } : stack));
+		return stacks.map((stack) => (stack.id === id ? { ...stack, ...updateStack } : stack));
+	});
+};
+
+export const addStackState = (newStack) => {
+	stackFormStore.update((stacks) => {
+		return [...stacks, newStack];
 	});
 };
 
