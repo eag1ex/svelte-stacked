@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { appNavigation } from '@data/navigation';
+import { appNavigation } from '@/data/navigation';
 
 interface PageState {
 	title: string;

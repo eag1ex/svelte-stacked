@@ -1,2 +1,3 @@
 export * from './common';
-export * from './page.store';
+export * from './page.state';
+export * from './shared.state';

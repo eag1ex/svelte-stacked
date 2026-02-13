@@ -8,12 +8,12 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		alias: {
-			'@data': path.resolve('src/data'),
-			'@types': path.resolve('src/types'),
-			'@components': path.resolve('src/components'),
-			'@stores': path.resolve('src/stores'),
-			'@assets': path.resolve('src/assets'),
-			'@lib': path.resolve('src/lib')
+			'@/data': path.resolve('src/data'),
+			'@/types': path.resolve('src/types'),
+			'@/components': path.resolve('src/components'),
+			'@/stores': path.resolve('src/stores'),
+			'@/assets': path.resolve('src/assets'),
+			'@/lib': path.resolve('src/lib')
 		}
 	},
 	preprocess: [

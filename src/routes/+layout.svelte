@@ -1,13 +1,25 @@
 <script lang="ts">
 	import './layout.css';
 	import '../styles/styles.scss';
-	import { pageState, updateTitle } from '@stores/pageState';
+	import { sharedState } from '@/stores/index'; // Import the shared state store
+
+	import { pageState, updateTitle } from '@/stores/pageState';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
-	import Header from '@components/Header.svelte';
+	import Header from '@/components/Header.svelte';
 	import { page } from '$app/stores';
-	import { appNavigation } from '@data/navigation';
+	import { appNavigation } from '@/data/navigation';
 	import { derived } from 'svelte/store';
 	import { goto } from '$app/navigation';
+	import type { SharedState } from '@/types/index';
+
+	let stateData: SharedState = {
+		id: null,
+		data: null
+	};
+
+	$: {
+		stateData = $sharedState;
+	}
 
 	let currentTab = derived(page, ($page) => $page.url.pathname);
 

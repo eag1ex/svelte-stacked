@@ -1,53 +1,29 @@
 <!-- src/routes/stacks.svelte -->
 <script lang="ts">
-	import { writable } from 'svelte/store';
-	import { Status } from '@lib/index'; // Enum for Status: Draft, Published
+	import { stackFormStore, updateStackState, deleteStackState } from '@/stores/index'; // Import the store
 
-	// Article store for managing articles
-	export const articles = writable([
-		{ id: 1, title: 'Sample Article', status: Status.Published },
-		{ id: 2, title: 'Draft Article', status: Status.Draft }
-	]);
+	import Stack from '@/components/Stack.svelte';
 
-	let title = '';
-	let status = Status.Draft;
-
-	const addArticle = () => {
-		articles.update((currentArticles) => [
-			...currentArticles,
-			{ id: currentArticles.length + 1, title, status }
-		]);
-		title = ''; // Reset form
-		status = Status.Draft; // Reset status
+	const handleUpdate = (id, updatedCard) => {
+		updateStackState(id, updatedCard);
 	};
+
+	const handleDelete = (id) => {
+		deleteStackState(id);
+	};
+
+	let stacks = [];
+	$: stacks = $stackFormStore;
 </script>
 
 <section class="mx-auto p-6">
 	<h1>Stacks - CRUD Operations</h1>
 
-	<!-- Form to add articles -->
-	<form on:submit|preventDefault={addArticle}>
-		<div class="form-group">
-			<label for="title">Article Title</label>
-			<input type="text" id="title" bind:value={title} class="input" placeholder="Enter title" />
+	<main class="container mx-auto mt-10 w-full rounded-lg bg-white p-6 shadow-lg">
+		<div>
+			{#each stacks as stack (stack.id)}
+				<Stack {stack} onUpdate={handleUpdate} onDelete={handleDelete} />
+			{/each}
 		</div>
-		<div class="form-group">
-			<label for="status">Status</label>
-			<select bind:value={status} class="select">
-				<option value={Status.Draft}>Draft</option>
-				<option value={Status.Published}>Published</option>
-			</select>
-		</div>
-		<button type="submit" class="button">Add Article</button>
-	</form>
-
-	<!-- Article list -->
-	<ul>
-		{#each $articles as article}
-			<li class="card">
-				<h3>{article.title}</h3>
-				<p>Status: {article.status}</p>
-			</li>
-		{/each}
-	</ul>
+	</main>
 </section>
