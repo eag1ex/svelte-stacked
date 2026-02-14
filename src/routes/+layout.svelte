@@ -11,6 +11,7 @@
 	import { derived } from 'svelte/store';
 	import { goto } from '$app/navigation';
 	import type { SharedState } from '@/types/index';
+	import { makeServer } from '@/lib/mockServer';
 
 	let stateData: SharedState = {
 		id: null,
@@ -41,6 +42,10 @@
 	$: {
 		title = $pageState.title;
 	}
+
+	//if (import.meta.env.MODE === 'development') {
+	makeServer();
+	//}
 </script>
 
 <svelte:head>

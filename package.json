@@ -17,9 +17,10 @@
 	},
 	"dependencies": {
 		"@sveltejs/kit": "^2.50.2",
-		"svelte": "^5.49.2",
 		"@tailwindcss/typography": "^0.5.19",
 		"mdsvex": "^0.12.6",
+		"miragejs": "^0.1.48",
+		"svelte": "^5.49.2",
 		"tailwindcss": "^4.1.18"
 	},
 	"devDependencies": {

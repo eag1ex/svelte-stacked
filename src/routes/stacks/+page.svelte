@@ -3,25 +3,36 @@
 		stackFormStore,
 		updateStackState,
 		deleteStackState,
-		addStackState
-	} from '@/stores/index'; // Import the store
+		addStackState,
+		stackState,
+		dataLoaded
+	} from '@/stores/index';
 
-	// import Stack from '@/components/Stack.svelte';
 	import StackEdit from '@/components/StackEdit.svelte';
 	import StackView from '@/components/StackView.svelte';
+	import type { LoadState, StackApi, StackApiStatus } from '@/types/index';
+
+	import StatusFilter from '@/components/StatusFilter.svelte';
+
+	export let data;
+
+	let stacks: StackApi[] = [];
 	let editingId: number | null = null;
 	let addingNew = false;
+	let selectedStatus: StackApiStatus | null;
 
-	const handleUpdate = (id, updatedCard) => {
-		updateStackState(id, updatedCard);
-		editingId = null;
-		addingNew = false;
+	const handleUpdate = (id, updatedStack) => {
+		updateStackState(id, updatedStack, () => {
+			editingId = null;
+			addingNew = false;
+		});
 	};
 
-	const handleNew = (id, updatedCard) => {
-		addStackState(updatedCard);
-		editingId = null;
-		addingNew = false;
+	const handleNew = (id, updatedStack) => {
+		addStackState(updatedStack, () => {
+			editingId = null;
+			addingNew = false;
+		});
 	};
 
 	const handleEdit = (id: number) => {
@@ -30,9 +41,10 @@
 	};
 
 	const onDelete = (id) => {
-		deleteStackState(id);
-		editingId = null;
-		addingNew = false;
+		deleteStackState(id, () => {
+			editingId = null;
+			addingNew = false;
+		});
 	};
 
 	const handleCancel = () => {
@@ -44,8 +56,21 @@
 		addingNew = true;
 	};
 
-	let stacks = [];
-	$: stacks = $stackFormStore;
+	let state: LoadState = 'initial';
+
+	$: state = $stackState;
+	$: if (data?.stacks && !$stackFormStore.length && !$dataLoaded) {
+		stackFormStore.set(data?.stacks);
+		dataLoaded.set(true);
+	}
+
+	$: stacks = selectedStatus
+		? $stackFormStore.filter((n) => n.status === selectedStatus)
+		: $stackFormStore;
+
+	function toggle(stat: string): void {
+		selectedStatus = stat;
+	}
 </script>
 
 <section class="mx-auto w-full">
@@ -57,6 +82,8 @@
 	>
 		Add New Stack
 	</button>
+
+	<StatusFilter {selectedStatus} {toggle} />
 	<!-- Table Header -->
 	<div class="flex items-center border-b bg-gray-100 p-4 text-sm font-semibold text-gray-600">
 		<div class="w-16"></div>
@@ -70,12 +97,23 @@
 	<!-- Rows -->
 	<div class="flex flex-col divide-y">
 		{#if addingNew}
-			<StackEdit mode="new" onUpdate={handleNew} onCancel={handleCancel} />
+			<StackEdit
+				mode="new"
+				onUpdate={handleNew}
+				onCancel={handleCancel}
+				updating={state === 'loading'}
+			/>
 		{/if}
 
 		{#each stacks as stack (stack.id)}
 			{#if stack.id === editingId}
-				<StackEdit {stack} onUpdate={handleUpdate} onCancel={handleCancel} {onDelete} />
+				<StackEdit
+					{stack}
+					onUpdate={handleUpdate}
+					onCancel={handleCancel}
+					{onDelete}
+					updating={state === 'loading'}
+				/>
 			{:else}
 				<StackView {stack} onEdit={handleEdit} />
 			{/if}

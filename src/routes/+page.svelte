@@ -1,5 +1,6 @@
 <!-- src/routes/index.svelte -->
 <script lang="ts">
+	import type { StackApi } from '@/types/api.stacks';
 </script>
 
 <h1>Welcome to the Svelte App</h1>

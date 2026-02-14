@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { Status } from '@/lib/enums';
+	import Progress from './Progress.svelte';
+	import { generateUniqueId, getCurrentISODate } from '@/lib/utils';
 
 	export let stack = {
 		id: null,
@@ -10,6 +12,7 @@
 	};
 
 	export let mode: 'new' | 'edit' = 'edit';
+	export let updating: boolean = false;
 
 	export let onUpdate: Function;
 	export let onCancel: Function;
@@ -23,14 +26,6 @@
 	$: isAuthorValid = author.trim().length > 0;
 	$: isFormValid = isTitleValid && isAuthorValid;
 
-	function generateUniqueId() {
-		return Date.now() + Math.floor(Math.random() * 1000);
-	}
-
-	function getCurrentISODate() {
-		return new Date().toISOString();
-	}
-
 	function handleSave() {
 		if (!isFormValid) return;
 
@@ -38,6 +33,7 @@
 		let createdAt = stack.createdAt;
 
 		if (mode === 'new') {
+			// keep these here but  they are updated server side any ways
 			id = generateUniqueId();
 			createdAt = getCurrentISODate();
 		}
@@ -110,5 +106,9 @@
 		<button on:click={onCancel} class="rounded bg-gray-500 px-3 py-1 text-sm text-white">
 			{mode === 'new' ? 'Cancel' : 'View'}
 		</button>
+
+		{#if updating === true}
+			<Progress />
+		{/if}
 	</div>
 </div>
