@@ -8,7 +8,7 @@
 	const statuses = [Status.Draft, Status.Published];
 </script>
 
-<div class="flex gap-2">
+<div class="flex min-h-10 gap-4">
 	{#each statuses as status}
 		<button
 			class={`chip capitalize ${selectedStatus === status ? 'preset-filled' : 'preset-tonal'}`}

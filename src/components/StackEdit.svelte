@@ -53,7 +53,11 @@
 	</div>
 
 	<div class="w-1/3">
-		<input bind:value={title} placeholder="Title" class="w-full rounded border px-2 py-1 text-sm" />
+		<input
+			bind:value={title}
+			placeholder="Title"
+			class="w-[90%] rounded border px-2 py-2 text-sm"
+		/>
 		{#if !isTitleValid}
 			<p class="mt-1 text-xs text-red-600">Title is required</p>
 		{/if}
@@ -63,7 +67,7 @@
 		<input
 			bind:value={author}
 			placeholder="Author"
-			class="w-full rounded border px-2 py-1 text-sm"
+			class="w-[90%] rounded border px-2 py-2 text-sm"
 		/>
 		{#if !isAuthorValid}
 			<p class="mt-1 text-xs text-red-600">Author is required</p>
@@ -77,7 +81,6 @@
 
 	<!-- Status Select -->
 	<div class="w-32">
-		<label for="status" class="block text-sm">Status</label>
 		<select bind:value={status} id="status" class="w-full rounded border p-2 text-sm">
 			<option value={Status.Published}>Published</option>
 			<option value={Status.Draft}>Draft</option>
@@ -85,30 +88,31 @@
 	</div>
 
 	<!-- Actions -->
-	<div class="flex w-60 justify-end gap-2">
+	<div class="flex min-h-9 w-80 items-center justify-end gap-2">
 		<button
 			disabled={!isFormValid}
 			on:click={handleSave}
-			class="rounded bg-green-500 px-3 py-1 text-sm text-white disabled:opacity-50"
+			class="min-h-8 rounded bg-green-500 px-3 py-1 text-sm text-white disabled:opacity-50"
 		>
 			{mode === 'new' ? 'Add' : 'Update'}
 		</button>
 
-		{#if mode === 'edit'}
-			<button
-				on:click={() => onDelete(stack.id)}
-				class="rounded bg-red-500 px-3 py-1 text-sm text-white"
-			>
-				Delete
-			</button>
-		{/if}
+		<button
+			on:click={() => onDelete(stack.id)}
+			class="min-h-8 rounded bg-red-500 px-3 py-1 text-sm text-white"
+		>
+			Delete
+		</button>
 
-		<button on:click={onCancel} class="rounded bg-gray-500 px-3 py-1 text-sm text-white">
+		<button on:click={onCancel} class="min-h-8 rounded bg-gray-500 px-3 py-1 text-sm text-white">
 			{mode === 'new' ? 'Cancel' : 'View'}
 		</button>
 
 		{#if updating === true}
 			<Progress />
+		{/if}
+		{#if updating !== true}
+			<div class="min-h-8 min-w-5">&nbsp;</div>
 		{/if}
 	</div>
 </div>

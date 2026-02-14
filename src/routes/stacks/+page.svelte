@@ -10,6 +10,7 @@
 
 	import StackEdit from '@/components/StackEdit.svelte';
 	import StackView from '@/components/StackView.svelte';
+	import SearchFilter from '@/components/SearchFilter.svelte';
 	import type { LoadState, StackApi, StackApiStatus } from '@/types/index';
 
 	import StatusFilter from '@/components/StatusFilter.svelte';
@@ -20,6 +21,14 @@
 	let editingId: number | null = null;
 	let addingNew = false;
 	let selectedStatus: StackApiStatus | null;
+	let filteredStacks: StackApi[] = [];
+	let searchTerm: string = '';
+	// let itemState: { id: number | string | null; state: LoadState; _new?: boolean } | null;
+	let itemStateLoading: string | null;
+
+	const handleSearch = (term: string) => {
+		searchTerm = term;
+	};
 
 	const handleUpdate = (id, updatedStack) => {
 		updateStackState(id, updatedStack, () => {
@@ -56,17 +65,29 @@
 		addingNew = true;
 	};
 
-	let state: LoadState = 'initial';
-
-	$: state = $stackState;
+	$: itemStateLoading =
+		$stackState?.state === 'loading' ? ($stackState._new ? 'new' : $stackState.id) : null;
 	$: if (data?.stacks && !$stackFormStore.length && !$dataLoaded) {
 		stackFormStore.set(data?.stacks);
 		dataLoaded.set(true);
 	}
 
+	$: {
+		filteredStacks = $stackFormStore.filter((stack) => {
+			return (
+				stack.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+				stack.author.toLowerCase().includes(searchTerm.toLowerCase())
+			);
+		});
+	}
+
 	$: stacks = selectedStatus
-		? $stackFormStore.filter((n) => n.status === selectedStatus)
-		: $stackFormStore;
+		? filteredStacks.filter((stack) => stack.status === selectedStatus)
+		: filteredStacks;
+
+	// let itemStateLoading = (id: any) => {
+	// 	return itemState?.state === 'loading' && (itemState.id === id || itemState?._new);
+	// };
 
 	function toggle(stat: string): void {
 		selectedStatus = stat;
@@ -74,16 +95,19 @@
 </script>
 
 <section class="mx-auto w-full">
-	<h1 class="mb-6 text-2xl font-bold">Stacks - CRUD Operations</h1>
+	<h1 class="mb-6 text-2xl font-bold">Stack List</h1>
 
-	<button
-		on:click={startAddingNew}
-		class="mb-6 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-	>
-		Add New Stack
-	</button>
+	<div class="mb-8 flex items-center justify-center space-x-6">
+		<button
+			on:click={startAddingNew}
+			class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+		>
+			Add
+		</button>
+		<SearchFilter onSearch={handleSearch} />
+		<StatusFilter {selectedStatus} {toggle} />
+	</div>
 
-	<StatusFilter {selectedStatus} {toggle} />
 	<!-- Table Header -->
 	<div class="flex items-center border-b bg-gray-100 p-4 text-sm font-semibold text-gray-600">
 		<div class="w-16"></div>
@@ -91,7 +115,7 @@
 		<div class="w-40">Author</div>
 		<div class="w-40">Created</div>
 		<div class="w-32">Status</div>
-		<div class="w-60 text-right">Actions</div>
+		<div class="w-80 text-right">Actions</div>
 	</div>
 
 	<!-- Rows -->
@@ -101,7 +125,8 @@
 				mode="new"
 				onUpdate={handleNew}
 				onCancel={handleCancel}
-				updating={state === 'loading'}
+				{onDelete}
+				updating={itemStateLoading === 'new'}
 			/>
 		{/if}
 
@@ -111,11 +136,15 @@
 					{stack}
 					onUpdate={handleUpdate}
 					onCancel={handleCancel}
-					{onDelete}
-					updating={state === 'loading'}
+					updating={itemStateLoading === stack.id}
 				/>
 			{:else}
-				<StackView {stack} onEdit={handleEdit} />
+				<StackView
+					{stack}
+					onEdit={handleEdit}
+					{onDelete}
+					updating={itemStateLoading === stack.id}
+				/>
 			{/if}
 		{/each}
 	</div>

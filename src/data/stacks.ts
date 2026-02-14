@@ -10,7 +10,7 @@ export default /** StackApi[] */ [
 	{
 		id: 2,
 		title: 'Vue.js',
-		status: 'draft',
+		status: 'Draft',
 		author: 'Evan You',
 		createdAt: '2022-06-15T09:00:00Z'
 	},

@@ -4,49 +4,53 @@ import type { LoadState, StackApi } from '@/types/index';
 import { addStackPost, deleteStack, getStacks, patchStack } from '@/lib/api';
 
 export const stackFormStore = writable<StackApi[]>([]);
-export const stackState = writable<LoadState>('initial');
+// manage loading status
+export const stackState = writable<{
+	id: string | number | null;
+	state: LoadState;
+	_new?: boolean;
+} | null>(null);
 export const dataLoaded = writable<boolean | null>(null);
 
 export const updateStackState = (id, updateStack, done) => {
-	stackState.set('loading');
+	stackState.set({ id, state: 'loading' });
 	patchStack(id, updateStack).then((n) => {
-		if (n.error) stackState.set('error');
+		if (n.error) stackState.set({ id, state: 'error' });
 		else {
 			stackFormStore.update((stacks) => {
 				return stacks.map((stack) => (stack.id === n.stack.id ? { ...stack, ...n.stack } : stack));
 			});
-			stackState.set('complete');
+			stackState.set({ id, state: 'complete' });
 		}
 		if (typeof done === 'function') done();
 	});
 };
 
 export const addStackState = (newStack, done) => {
-	stackState.set('loading');
+	stackState.set({ id: null, state: 'loading', _new: true });
 	addStackPost(newStack).then((n) => {
 		if (n.error) {
-			stackState.set('error');
 		} else {
 			stackFormStore.update((stacks) => {
 				return [n.stack, ...stacks];
 			});
-			stackState.set('complete');
+			stackState.set({ id: n.stack.id, state: 'complete', _new: true });
 		}
 		if (typeof done === 'function') done();
 	});
 };
 
 export const deleteStackState = (id, done) => {
-	stackState.set('loading');
+	stackState.set({ id, state: 'loading' });
 	deleteStack(id).then((n) => {
-		console.log('deleteStackState', n);
 		if (n.error) {
-			stackState.set('error');
+			stackState.set({ id, state: 'error' });
 		} else {
 			stackFormStore.update((stacks) => {
 				return stacks.filter((stack) => stack.id !== n.deletedId && !!n.deletedId);
 			});
-			stackState.set('complete');
+
+			stackState.set({ id, state: 'complete' });
 		}
 		if (typeof done === 'function') done();
 	});
