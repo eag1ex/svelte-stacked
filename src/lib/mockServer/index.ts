@@ -3,7 +3,24 @@ import type { StackApi } from '@/types/api.stacks';
 import { createServer, Model, Factory, RestSerializer, Response } from 'miragejs';
 import { getCurrentISODate, generateUniqueId } from '../utils';
 
-export function makeServer() {
+/**
+ * 
+ * @example example list 
+ * stacksMockData > []
+ * {
+		id: 1,
+		title: 'React',
+		status: 'Published',
+		author: 'Facebook',
+		createdAt: '2023-01-01T12:00:00Z'
+	},
+ */
+
+const apiUri = () => {
+	return import.meta.env.VITE_API_URI || process.env.API_URI;
+};
+
+export function createMockServer() {
 	const size = stacksMockData.length;
 	return createServer({
 		serializers: {
@@ -30,7 +47,7 @@ export function makeServer() {
 		},
 
 		routes() {
-			this.namespace = 'api';
+			this.namespace = apiUri();
 
 			this.get('/stacks', (schema) => {
 				return schema.all('stack');

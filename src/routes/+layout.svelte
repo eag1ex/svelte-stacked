@@ -11,7 +11,7 @@
 	import { derived } from 'svelte/store';
 	import { goto } from '$app/navigation';
 	import type { SharedState } from '@/types/index';
-	import { makeServer } from '@/lib/mockServer';
+	import { createMockServer } from '@/lib/mockServer';
 	import { onMount } from 'svelte';
 	import { APP } from '@/data/app';
 
@@ -56,11 +56,12 @@
 			typeof document === 'object' && document.documentElement.setAttribute('data-theme', val);
 		});
 	}
+
 	onMount(() => {
 		// setTheme
 	});
 	//if (import.meta.env.MODE === 'development') {
-	makeServer();
+	createMockServer();
 	//}
 </script>
 

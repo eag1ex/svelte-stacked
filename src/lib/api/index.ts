@@ -1,10 +1,12 @@
 import type { StackApi } from '@/types/api.stacks';
 import { ErrorType } from '../enums';
-import { delay } from '../utils';
+import { delay, prefixApi } from '../utils';
 
 export async function getStacks(): Promise<{ stacks: StackApi[]; ok: boolean; error?: string }> {
 	try {
-		const response = await fetch('/api/stacks');
+		const uri = prefixApi('/stacks');
+		console.log('calling uri:', uri);
+		const response = await fetch(uri);
 
 		if (!response.ok) {
 			const { error } = await response.json();
@@ -34,7 +36,7 @@ export async function addStackPost(
 ): Promise<{ stack: StackApi; ok: boolean; error?: string }> {
 	try {
 		await delay(500);
-		const response = await fetch('/api/stack', {
+		const response = await fetch(prefixApi('/api/stack'), {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -63,7 +65,7 @@ export async function patchStack(
 ): Promise<{ stack: StackApi; ok: boolean; error?: string }> {
 	try {
 		await delay(500);
-		const response = await fetch(`/api/stack/${id}`, {
+		const response = await fetch(prefixApi(`/api/stack/${id}`), {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json'
@@ -90,7 +92,7 @@ export async function deleteStack(
 ): Promise<{ deletedId: string; ok: boolean; error?: string }> {
 	try {
 		await delay(500);
-		const response = await fetch(`/api/stack/${id}`, {
+		const response = await fetch(prefixApi(`/api/stack/${id}`), {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'
