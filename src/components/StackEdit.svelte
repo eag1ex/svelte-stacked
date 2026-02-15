@@ -23,18 +23,42 @@
 	let status = stack.status || Status.Draft;
 	let author = stack.author;
 
-	$: isTitleValid = title.trim().length > 0;
-	$: isAuthorValid = author.trim().length > 0;
-	$: isFormValid = isTitleValid && isAuthorValid;
+	let isTitleValid = true;
+	let isAuthorValid = true;
+	let isStatusValid = true;
 
-	function handleSave() {
-		if (!isFormValid) return;
+	function handleSubmit() {
+		// Reset validation
+		isTitleValid = true;
+		isAuthorValid = true;
+		isStatusValid = true;
 
+		// Validate title
+		if (!title.trim() || title.trim().length > 100) {
+			isTitleValid = false;
+		}
+
+		// Validate author
+		if (!author.trim() || author.trim().length > 100) {
+			isAuthorValid = false;
+		}
+
+		// Validate status
+		if (status !== Status.Draft && status !== Status.Published) {
+			isStatusValid = false;
+		}
+
+		// Stop if any validation failed
+		if (!isTitleValid || !isAuthorValid || !isStatusValid) {
+			return;
+		}
+
+		// Prepare data
 		let id = stack.id;
 		let createdAt = stack.createdAt;
 
 		if (mode === 'new') {
-			// keep these here but  they are updated server side any ways
+			// these values are ignored when returned from server will set its own values
 			id = generateUniqueId();
 			createdAt = getCurrentISODate();
 		}
@@ -48,7 +72,7 @@
 	}
 </script>
 
-<div class="off flex min-h-25 items-center bg-blue-50 p-4">
+<form class="off flex min-h-25 items-center bg-blue-50 p-4" on:submit|preventDefault={handleSubmit}>
 	<div class="flex w-16 justify-center">
 		<StackIcon color={'var(--text-primary-dark)'} />
 	</div>
@@ -60,7 +84,9 @@
 			class="text-dark w-[90%] rounded border px-2 py-2 text-sm"
 		/>
 		{#if !isTitleValid}
-			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">Title is required</p>
+			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">
+				Title is required and must be ≤ 100 characters
+			</p>
 		{/if}
 	</div>
 
@@ -71,7 +97,9 @@
 			class="text-dark w-[90%] rounded border px-2 py-2 text-sm"
 		/>
 		{#if !isAuthorValid}
-			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">Author is required</p>
+			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">
+				Author is required and must be ≤ 100 characters
+			</p>
 		{/if}
 	</div>
 
@@ -86,15 +114,16 @@
 			<option value={Status.Published}>Published</option>
 			<option value={Status.Draft}>Draft</option>
 		</select>
+		{#if !isStatusValid}
+			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">
+				Status must be Draft or Published
+			</p>
+		{/if}
 	</div>
 
 	<!-- Actions -->
 	<div class="flex min-h-9 w-80 items-center justify-end gap-2">
-		<button
-			disabled={!isFormValid}
-			on:click={handleSave}
-			class="min-h-9 rounded bg-[var(--bg-color)] px-3 py-1 text-sm text-white disabled:opacity-50"
-		>
+		<button type="submit" class="min-h-9 rounded bg-[var(--bg-color)] px-3 py-1 text-sm text-white">
 			{mode === 'new' ? 'Add' : 'Update'}
 		</button>
 
@@ -107,7 +136,7 @@
 		<button
 			disabled={mode === 'new'}
 			on:click={() => onDelete(stack.id)}
-			class={`text-secondary min-h-9 rounded bg-[var(--color-warning)] px-3 py-1 text-sm`}
+			class="text-secondary min-h-9 rounded bg-[var(--color-warning)] px-3 py-1 text-sm"
 		>
 			Delete
 		</button>
@@ -119,4 +148,4 @@
 			<div class="min-h-8 min-w-5">&nbsp;</div>
 		{/if}
 	</div>
-</div>
+</form>

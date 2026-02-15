@@ -2,6 +2,7 @@ import { stacksMockData } from '@/data/index';
 import type { StackApi } from '@/types/api.stacks';
 import { createServer, Model, Factory, RestSerializer, Response } from 'miragejs';
 import { getCurrentISODate, generateUniqueId } from '../utils';
+import { ErrorType } from '..';
 
 /**
  * 
@@ -15,7 +16,6 @@ import { getCurrentISODate, generateUniqueId } from '../utils';
 		createdAt: '2023-01-01T12:00:00Z'
 	},
  */
-
 const apiUri = () => {
 	return import.meta.env.VITE_API_URI || process.env.API_URI;
 };
@@ -69,13 +69,14 @@ export function createMockServer() {
 				const { id } = request.params;
 				const attrs = JSON.parse(request.requestBody) as Partial<StackApi>;
 				const stack = schema.find('stack', id);
+				// make sure not manipulation from client
+				attrs.createdAt = stack?.createdAt;
 
 				if (stack) {
 					const updated = stack.update(attrs);
-
 					return updated;
 				} else {
-					return new Response(404, {}, { error: `Stack not found, id ${id}` });
+					return new Response(404, {}, { error: ErrorType.STACK_NOT_FOUND });
 				}
 			});
 
@@ -85,9 +86,9 @@ export function createMockServer() {
 
 				if (stack) {
 					stack.destroy();
-					return new Response(200, {}, { message: 'Stack deleted', deletedId: id });
+					return new Response(200, {}, { message: ErrorType.STACK_DELETED, deletedId: id });
 				} else {
-					return new Response(404, {}, { error: `Stack not found, id ${id}` });
+					return new Response(404, {}, { error: ErrorType.STACK_DELETED });
 				}
 			});
 		}

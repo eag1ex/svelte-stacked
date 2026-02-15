@@ -4,9 +4,7 @@ import { delay, prefixApi } from '../utils';
 
 export async function getStacks(): Promise<{ stacks: StackApi[]; ok: boolean; error?: string }> {
 	try {
-		const uri = prefixApi('/stacks');
-		console.log('calling uri:', uri);
-		const response = await fetch(uri);
+		const response = await fetch(prefixApi('/stacks'));
 
 		if (!response.ok) {
 			const { error } = await response.json();
@@ -14,7 +12,6 @@ export async function getStacks(): Promise<{ stacks: StackApi[]; ok: boolean; er
 		}
 
 		const data = await response.json();
-
 		const stackList = (data.stacks as StackApi[]).map((n) => {
 			const id = n.id.toString();
 			return {
@@ -36,7 +33,7 @@ export async function addStackPost(
 ): Promise<{ stack: StackApi; ok: boolean; error?: string }> {
 	try {
 		await delay(500);
-		const response = await fetch(prefixApi('/api/stack'), {
+		const response = await fetch(prefixApi('/stack'), {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -65,7 +62,7 @@ export async function patchStack(
 ): Promise<{ stack: StackApi; ok: boolean; error?: string }> {
 	try {
 		await delay(500);
-		const response = await fetch(prefixApi(`/api/stack/${id}`), {
+		const response = await fetch(prefixApi(`/stack/${id}`), {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json'
@@ -92,7 +89,7 @@ export async function deleteStack(
 ): Promise<{ deletedId: string; ok: boolean; error?: string }> {
 	try {
 		await delay(500);
-		const response = await fetch(prefixApi(`/api/stack/${id}`), {
+		const response = await fetch(prefixApi(`/stack/${id}`), {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'
@@ -105,7 +102,6 @@ export async function deleteStack(
 		}
 
 		const data = await response.json();
-		console.log('deleteStack', data);
 		return { deletedId: data.deletedId, ok: true };
 	} catch (err) {
 		console.error(err);
