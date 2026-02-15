@@ -1,7 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import '../styles/styles.scss';
-	import { sharedState } from '@/stores/index'; // Import the shared state store
+	import { setTheme, sharedState } from '@/stores/index'; // Import the shared state store
 
 	import { pageState, updateTitle } from '@/stores/pageState';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
@@ -12,11 +12,14 @@
 	import { goto } from '$app/navigation';
 	import type { SharedState } from '@/types/index';
 	import { makeServer } from '@/lib/mockServer';
+	import { onMount } from 'svelte';
+	import { APP } from '@/data/app';
 
 	let stateData: SharedState = {
 		id: null,
 		data: null
 	};
+	const currYear = new Date().getFullYear();
 
 	$: {
 		stateData = $sharedState;
@@ -43,44 +46,66 @@
 		title = $pageState.title;
 	}
 
+	$: {
+		// project theme color
+		const themeColor =
+			typeof localStorage === 'object' ? localStorage.getItem('theme') || 'dark' : 'dark';
+
+		setTheme(themeColor, (val) => {
+			console.log('theme is', val);
+			typeof document === 'object' && document.documentElement.setAttribute('data-theme', val);
+		});
+	}
+	onMount(() => {
+		// setTheme
+	});
 	//if (import.meta.env.MODE === 'development') {
 	makeServer();
 	//}
 </script>
 
 <svelte:head>
-	<title>{title}</title>
-	<meta name="description" content="This is a description for the page {title}" />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content="This is a description for the page {title}" />
+	<title>{APP.TITLE} | {title}</title>
+	<meta property="og:title" content={`${APP.TITLE} | ${title}`} />
+	<meta name="description" content={`${APP.DESC} | Build by ${APP.BY}`} />
+
+	<meta property="og:description" content={`${APP.DESC} | Build by ${APP.BY}`} />
 </svelte:head>
 
-<main class="container mx-auto mt-10 rounded-lg bg-white p-6 shadow-lg">
+<main class="container mx-auto mt-10 rounded-lg bg-[rgba(255,255,255,0.05)] px-10 py-6 shadow-lg">
 	<Header {title} />
-	<Tabs bind:value={currentTab} class="w-full">
+	<Tabs bind:value={currentTab} class="mt-4 w-full">
 		<Tabs.List class="flex w-full justify-center gap-4">
 			{#each appNavigation as { pageName, slug, title }}
-				<Tabs.Trigger value={slug} class="text-lg text-blue-600 hover:underline">
+				<Tabs.Trigger value={slug} class="text-lg">
 					<a
 						on:click|preventDefault={() => {
 							handleTabClick(slug);
 							currentTab = slug;
 						}}
 						href={slug}
-						class="block py-2 text-center">{title}</a
+						class="block py-1 text-center">{title}</a
 					>
 				</Tabs.Trigger>
 			{/each}
 		</Tabs.List>
 
-		<Tabs.Indicator class="h-1 bg-blue-500" />
+		<!-- <Tabs.Indicator class="h-1 bg-blue-500" /> -->
 	</Tabs>
 
 	<div class="mx-auto w-full">
 		<slot></slot>
 	</div>
 
-	<footer class="mt-6 text-center text-sm text-gray-500">
-		<p>&copy; 2024 My App</p>
+	<footer class="mt-10 text-center text-sm text-gray-500">
+		<p>
+			&copy; {currYear} | {APP.TITLE} |
+			<a
+				class="underline"
+				rel="nofollow noopener"
+				target="_blank"
+				href="https://michaelworks.eaglex.net/">By {APP.BY}</a
+			>
+		</p>
 	</footer>
 </main>

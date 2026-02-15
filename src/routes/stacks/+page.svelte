@@ -58,6 +58,7 @@
 
 	const handleCancel = () => {
 		editingId = null;
+		addingNew = false;
 	};
 
 	const startAddingNew = () => {
@@ -100,7 +101,7 @@
 	<div class="mb-8 flex items-center justify-center space-x-6">
 		<button
 			on:click={startAddingNew}
-			class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+			class="text-secondary rounded bg-[var(--color-warning)] px-4 py-2 font-bold"
 		>
 			Add
 		</button>
@@ -136,6 +137,7 @@
 					{stack}
 					onUpdate={handleUpdate}
 					onCancel={handleCancel}
+					{onDelete}
 					updating={itemStateLoading === stack.id}
 				/>
 			{:else}

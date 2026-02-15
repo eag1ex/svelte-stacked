@@ -11,7 +11,7 @@
 <div class="flex min-h-10 gap-4">
 	{#each statuses as status}
 		<button
-			class={`chip capitalize ${selectedStatus === status ? 'preset-filled' : 'preset-tonal'}`}
+			class={`chip text-[15px] capitalize ${selectedStatus === status ? 'preset-filled' : 'preset-tonal'}`}
 			on:click={() => toggle(selectedStatus === status ? null : status)}
 		>
 			<span>{status}</span>

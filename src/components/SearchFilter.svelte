@@ -38,9 +38,9 @@
 		bind:value={searchTerm}
 		on:input={handleSearch}
 		placeholder="Search by title or author"
-		class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+		class="text-dark w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-[var(--ochre)] focus:outline-none"
 	/>
-	<span class="shortcut-icon text-sm text-gray-500">⌘ + F</span>
+	<span class="shortcut-icon text-sm">⌘ + F</span>
 	<!-- Shortcut Symbol -->
 </div>
 

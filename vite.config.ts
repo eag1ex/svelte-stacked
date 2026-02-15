@@ -5,6 +5,10 @@ import { playwright } from '@vitest/browser-playwright';
 import { sveltekit } from '@sveltejs/kit/vite';
 
 export default defineConfig({
+	css: {
+		transformer: 'lightningcss'
+	},
+
 	plugins: [tailwindcss(), sveltekit(), devtoolsJson()],
 
 	test: {

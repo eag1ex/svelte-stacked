@@ -1,4 +1,5 @@
 <script lang="ts">
+	import StackIcon from './icons/StackIcon.svelte';
 	import Progress from './Progress.svelte';
 
 	export let stack: {
@@ -13,45 +14,54 @@
 	export let onDelete: Function;
 </script>
 
-<div class="flex items-center p-4 transition-colors hover:bg-gray-50">
+<div class={`stack-view-item flex items-center p-4 transition-colors stack-view-item-${stack.id}`}>
 	<div class="flex w-16 justify-center">
-		<div class="flex h-10 w-10 items-center justify-center rounded bg-gray-200">🔲</div>
+		<StackIcon color={'var(--text-color)'} />
 	</div>
 
-	<div class="w-1/3 truncate font-medium">
+	<div class=" w-1/3 truncate font-medium">
 		{stack.title}
 	</div>
 
-	<div class="w-40 text-sm text-gray-600">
+	<div class="w-40 text-sm">
 		{stack.author}
 	</div>
 
-	<div class="w-40 text-sm text-gray-600">
+	<div class="w-40 text-sm">
 		{new Date(stack.createdAt).toLocaleDateString()}
 	</div>
 
-	<div class="w-32 text-sm text-gray-600">
+	<div class="w-32 text-sm">
 		{stack.status}
 	</div>
 
 	<div class="flex min-h-9 w-80 items-center justify-end gap-2">
 		<button
-			on:click={() => onDelete(stack.id)}
-			class="min-h-8 rounded bg-red-500 px-3 py-1 text-sm text-white"
-		>
-			Delete
-		</button>
-		<button
 			on:click={() => onEdit(stack.id)}
-			class="min-h-8 rounded bg-blue-500 px-3 py-1 text-sm text-white"
+			class="text-secondary min-h-9 rounded bg-[var(--bg-color-reverse)] px-3 py-1 text-sm"
 		>
 			Edit
+		</button>
+		<button
+			on:click={() => onDelete(stack.id)}
+			class="text-secondary min-h-9 rounded bg-[var(--color-warning)] px-3 py-1 text-sm"
+		>
+			Delete
 		</button>
 		{#if updating === true}
 			<Progress />
 		{/if}
 		{#if updating !== true}
-			<div class="min-h-8 min-w-5">&nbsp;</div>
+			<div class="min-h-9 min-w-5">&nbsp;</div>
 		{/if}
 	</div>
 </div>
+
+<style>
+	.stack-view-item {
+		&:hover {
+			transition: background-color 0.5s ease;
+			background-color: var(--color-warning);
+		}
+	}
+</style>
