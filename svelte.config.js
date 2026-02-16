@@ -13,7 +13,7 @@ const config = {
 			fallback: '200.html'
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/stacked' : ''
+			base: process.env.NODE_ENV === 'production' ? '/svelte-stacked' : ''
 		},
 
 		alias: {
