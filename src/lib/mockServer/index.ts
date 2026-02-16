@@ -17,7 +17,8 @@ import { ErrorType } from '..';
 	},
  */
 const apiUri = () => {
-	return import.meta.env.VITE_API_URI || process.env.API_URI;
+	const uri = import.meta.env.VITE_API_URI || process.env.API_URI || 'api';
+	return uri;
 };
 
 export function createMockServer() {
@@ -26,7 +27,7 @@ export function createMockServer() {
 		serializers: {
 			application: RestSerializer
 		},
-		logging: false,
+		//logging: false,
 		models: {
 			stack: Model.extend<Partial<StackApi>>({})
 		},

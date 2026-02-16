@@ -42,7 +42,7 @@ describe('[api][get] getStacks()', () => {
 		expect(result.stacks.length).toBe(expectedStacks);
 
 		const _stacks = result.stacks.map((n) => {
-			delete n.createdAt;
+			if ((n as any).createdAt) delete (n as any).createdAt;
 			return n;
 		});
 		expect(_stacks[0]).toEqual({
@@ -65,11 +65,5 @@ describe('[api][get] getStacks()', () => {
 		const result = await getStacks();
 		expect(result.ok).toBe(false);
 		expect(result.error).toBe('RESPONSE_ERROR');
-	});
-});
-
-describe('Exit test', () => {
-	it('exists', () => {
-		expect(true).toBe(true);
 	});
 });

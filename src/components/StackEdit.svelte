@@ -114,7 +114,7 @@
 	</div>
 
 	<!-- Actions -->
-	<div class="flex min-h-9 w-80 items-center justify-end gap-2">
+	<div class="form-actions flex min-h-9 w-80 items-center justify-end gap-2">
 		<button type="submit" class="min-h-9 rounded bg-[var(--bg-color)] px-3 py-1 text-sm text-white">
 			{mode === 'new' ? 'Add' : 'Update'}
 		</button>
@@ -141,3 +141,10 @@
 		{/if}
 	</div>
 </form>
+
+<style lang="scss">
+	.form-actions {
+		position: relative;
+		left: 2px;
+	}
+</style>

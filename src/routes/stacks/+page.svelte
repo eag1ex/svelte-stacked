@@ -86,16 +86,12 @@
 		? filteredStacks.filter((stack) => stack.status === selectedStatus)
 		: filteredStacks;
 
-	// let itemStateLoading = (id: any) => {
-	// 	return itemState?.state === 'loading' && (itemState.id === id || itemState?._new);
-	// };
-
 	function toggle(stat: string): void {
 		selectedStatus = stat;
 	}
 </script>
 
-<section class="mx-auto w-full">
+<section class="w-ful mx-auto mb-20">
 	<h1 class="mb-6 text-2xl font-bold">Stack List</h1>
 
 	<div class="mb-8 flex items-center justify-center space-x-6">
@@ -116,7 +112,7 @@
 		<div class="w-40">Author</div>
 		<div class="w-40">Created</div>
 		<div class="w-32">Status</div>
-		<div class="w-80 text-right">Actions</div>
+		<div class="w-80 text-center">Actions</div>
 	</div>
 
 	<!-- Rows -->

@@ -7,7 +7,7 @@ test('<StackView/> renders correctly and shows progress icon when updating', asy
 	const stackData = stacksMockData[0];
 
 	const { container, unmount } = render(StackView, {
-		props: { stack: stackData, updating: false }
+		props: { stack: stackData, updating: false } as any
 	});
 
 	const wrapper = container.querySelector(`.stack-view-item-${stackData.id}`);
@@ -25,7 +25,7 @@ test('<StackView/> renders correctly and shows progress icon when updating', asy
 
 	unmount();
 	const { container: updatedContainer } = render(StackView, {
-		props: { stack: stackData, updating: true }
+		props: { stack: stackData, updating: true } as any
 	});
 
 	const updatedWrapper = updatedContainer.querySelector(`.stack-view-item-${stackData.id}`);

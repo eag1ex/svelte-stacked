@@ -1,1 +1,6 @@
 @use './theme.scss';
+
+.navigation .active-tab {
+	border: 2px solid var(--color-warning);
+	background-color: var(--color-warning);
+}
