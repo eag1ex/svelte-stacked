@@ -7,7 +7,8 @@ _temp
 .netlify
 .wrangler
 /.svelte-kit
-/build
+## for build branch we need this off
+# /build
 
 # OS
 .DS_Store
