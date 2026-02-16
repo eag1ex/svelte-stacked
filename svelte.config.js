@@ -7,8 +7,8 @@ import path from 'path';
 const config = {
 	kit: {
 		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
+			pages: 'docs', // for github
+			assets: 'docs', // for github
 
 			fallback: '200.html'
 		}),
