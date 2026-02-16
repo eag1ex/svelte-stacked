@@ -6,7 +6,7 @@ import path from 'path';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		//appDir: 'app',
+		appDir: '_app',
 		adapter: adapter({
 			pages: 'docs', // for github
 			assets: 'docs', // for github
