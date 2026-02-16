@@ -33,27 +33,22 @@
 		isAuthorValid = true;
 		isStatusValid = true;
 
-		// Validate title
 		if (!title.trim() || title.trim().length > 100) {
 			isTitleValid = false;
 		}
 
-		// Validate author
 		if (!author.trim() || author.trim().length > 100) {
 			isAuthorValid = false;
 		}
 
-		// Validate status
 		if (status !== Status.Draft && status !== Status.Published) {
 			isStatusValid = false;
 		}
 
-		// Stop if any validation failed
 		if (!isTitleValid || !isAuthorValid || !isStatusValid) {
 			return;
 		}
 
-		// Prepare data
 		let id = stack.id;
 		let createdAt = stack.createdAt;
 
@@ -72,7 +67,10 @@
 	}
 </script>
 
-<form class="off flex min-h-25 items-center bg-blue-50 p-4" on:submit|preventDefault={handleSubmit}>
+<form
+	class={`stack-edit-item off flex min-h-25 items-center bg-blue-50 p-4 stack-edit-item-${stack.id}`}
+	on:submit|preventDefault={handleSubmit}
+>
 	<div class="flex w-16 justify-center">
 		<StackIcon color={'var(--text-primary-dark)'} />
 	</div>
@@ -84,9 +82,7 @@
 			class="text-dark w-[90%] rounded border px-2 py-2 text-sm"
 		/>
 		{#if !isTitleValid}
-			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">
-				Title is required and must be ≤ 100 characters
-			</p>
+			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">Required and ≤ 100 characters</p>
 		{/if}
 	</div>
 
@@ -97,9 +93,7 @@
 			class="text-dark w-[90%] rounded border px-2 py-2 text-sm"
 		/>
 		{#if !isAuthorValid}
-			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">
-				Author is required and must be ≤ 100 characters
-			</p>
+			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">Required and ≤ 100 characters</p>
 		{/if}
 	</div>
 
@@ -115,9 +109,7 @@
 			<option value={Status.Draft}>Draft</option>
 		</select>
 		{#if !isStatusValid}
-			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">
-				Status must be Draft or Published
-			</p>
+			<p class="absolute mt-1 text-xs text-[var(--color-warning)]">Must be Draft or Published</p>
 		{/if}
 	</div>
 

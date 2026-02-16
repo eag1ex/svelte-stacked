@@ -101,7 +101,7 @@
 	<div class="mb-8 flex items-center justify-center space-x-6">
 		<button
 			on:click={startAddingNew}
-			class="text-secondary rounded bg-[var(--color-warning)] px-4 py-2 font-bold"
+			class="text-secondary add-new-stack rounded bg-[var(--color-warning)] px-4 py-2 font-bold"
 		>
 			Add
 		</button>

@@ -19,23 +19,23 @@
 		<StackIcon color={'var(--text-color)'} />
 	</div>
 
-	<div class=" w-1/3 truncate font-medium">
+	<div class="title-item w-1/3 truncate font-medium">
 		{stack.title}
 	</div>
 
-	<div class="w-40 text-sm">
+	<div class="author-item w-40 text-sm">
 		{stack.author}
 	</div>
 
-	<div class="w-40 text-sm">
+	<div class="date-item w-40 text-sm">
 		{new Date(stack.createdAt).toLocaleDateString()}
 	</div>
 
-	<div class="w-32 text-sm">
+	<div class="status-item w-32 text-sm">
 		{stack.status}
 	</div>
 
-	<div class="flex min-h-9 w-80 items-center justify-end gap-2">
+	<div class="edit-item flex min-h-9 w-80 items-center justify-end gap-2">
 		<button
 			on:click={() => onEdit(stack.id)}
 			class="text-secondary min-h-9 rounded bg-[var(--bg-color-reverse)] px-3 py-1 text-sm"
@@ -44,7 +44,7 @@
 		</button>
 		<button
 			on:click={() => onDelete(stack.id)}
-			class="text-secondary min-h-9 rounded bg-[var(--color-warning)] px-3 py-1 text-sm"
+			class="text-secondary delete-item min-h-9 rounded bg-[var(--color-warning)] px-3 py-1 text-sm"
 		>
 			Delete
 		</button>

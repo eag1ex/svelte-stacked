@@ -26,7 +26,7 @@ export function createMockServer() {
 		serializers: {
 			application: RestSerializer
 		},
-
+		logging: false,
 		models: {
 			stack: Model.extend<Partial<StackApi>>({})
 		},

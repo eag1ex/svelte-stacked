@@ -8,6 +8,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		alias: {
+			'@/routes': path.resolve('src/routes'),
 			'@/data': path.resolve('src/data'),
 			'@/types': path.resolve('src/types'),
 			'@/components': path.resolve('src/components'),

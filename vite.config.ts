@@ -37,7 +37,7 @@ export default defineConfig({
 		: undefined,
 	test: {
 		expect: { requireAssertions: true },
-
+		silent: true, // disable debug logs
 		projects: [
 			{
 				extends: './vite.config.ts',
