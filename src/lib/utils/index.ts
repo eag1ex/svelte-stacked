@@ -1,5 +1,6 @@
 export const prefixApi = (route: string) => {
 	const apiPrefix = import.meta.env.VITE_API_URI || process.env.API_URI;
+	console.log('apiPrefix is', apiPrefix);
 	return apiPrefix + route;
 };
 export function generateUniqueId() {
