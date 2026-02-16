@@ -2,19 +2,27 @@ import { mdsvex } from 'mdsvex';
 import sveltePreprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-static';
 import path from 'path';
+import dotenv from 'dotenv';
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const envPath = NODE_ENV === 'test' ? '.test' : '';
+try {
+	dotenv.config({ path: `./.env${envPath}` });
+} catch (err) {
+	console.warn('[env]', 'make sure to use correct .env file ', err.toString());
+}
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		appDir: '_app',
+		// appDir: '_app',
 		adapter: adapter({
 			pages: 'docs', // for github
-			assets: 'docs', // for github
-
-			fallback: '200.html'
+			assets: 'docs' // for github
+			//	fallback: '200.html'
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/svelte-stacked' : '',
+			base: process.env.NODE_ENV === 'production' ? '/' + process.env.BASE_PATH : '',
 			assets: ''
 		},
 
