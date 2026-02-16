@@ -6,6 +6,7 @@ import path from 'path';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
+		appDir: 'app',
 		adapter: adapter({
 			pages: 'docs', // for github
 			assets: 'docs', // for github
@@ -13,7 +14,8 @@ const config = {
 			fallback: '200.html'
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/svelte-stacked' : ''
+			base: process.env.NODE_ENV === 'production' ? '/svelte-stacked' : '',
+			assets: ''
 		},
 
 		alias: {

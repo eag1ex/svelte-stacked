@@ -16,6 +16,7 @@ try {
 const PORT = Number(process.env.PORT || 3000);
 
 export default defineConfig({
+	// base: NODE_ENV === 'production' ? 'svelte-stacked' : '',
 	define: {
 		'import.meta.env.VITE_ENVIRONMENT': JSON.stringify(process.env.NODE_ENV),
 		'import.meta.env.VITE_PORT': JSON.stringify(process.env.PORT),
