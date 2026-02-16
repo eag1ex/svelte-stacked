@@ -2,9 +2,17 @@
 
 Stack listing app build with Svelte, it allows you to perform all CRUD operations, it runs on mock server `miragejs`
 
+## Requirements
+
+- need Node version ^20.19.0
+- need to install chromium for testing
+
 ## Start
 
 ```sh
+
+## install all deps
+npm install
 
 npm run dev
 
@@ -27,7 +35,7 @@ npm run test
 - All crud operations are available: create, read, update, delete
 - Color theme switching
 - We use Tailwindcss with structured layers
-- Good separation co concerns (SOC)
+- Good separation of concerns (SOC)
 - State management integrated with service api
 - Passing tests
 - tslint and prettier clean and valid
@@ -39,11 +47,14 @@ npm run test
 
 - Svelte, miragejs, Typescript, CRUD, RestApi, Tailwindcss, css/scss,
 
-## Data
+## Data and Api
 
-Static data live in `/src/data/stacks.ts`
+Static data: `/src/data/stacks.ts`
+Api service: `src/lib/api`
 
 ## Testing
+
+last test results: `_DEVELOPER/test.results.md`
 
 Running tests with miragejs mock server requires jsdom with headless browser:
 
@@ -52,7 +63,8 @@ Running tests with miragejs mock server requires jsdom with headless browser:
 on windows it should install it under:
 `C:\Users\<username>\AppData\Local\ms-playwright\chromium-<version>\`
 
-## Requirements
+### Notes
 
-- need Node version ^20.19.0
-- need to install chromium for testing
+_- The warning about: `baseUrl and/or paths in your tsconfig.json which interferes with SvelteKit` in terminal, i kept baseUrl or intellisense wouldn't work_
+
+### Thank you

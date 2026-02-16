@@ -12,6 +12,7 @@
 		"strict": true,
 		"noImplicitAny": true,
 		"moduleResolution": "bundler",
+		// need it or wont get intellisense
 		"baseUrl": ".",
 		"paths": {
 			// for intellisense
