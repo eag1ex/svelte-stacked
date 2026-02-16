@@ -1,6 +1,8 @@
-# Stacks App
+# Stacked App
 
-Stack listing app build with Svelte, it allows you to perform all CRUD operations, it runs on mock server `miragejs`
+Stacked - application that lists stacks, build with Svelte, allowing you to perform all CRUD operations, runs with miragejs mock server.
+
+Static web app with hydrated backend, seo friendly.
 
 ## Requirements
 
@@ -52,15 +54,42 @@ npm run build
 - mock API endpoints with miragejs
 - SvelteKit integration
 - environment ready with dotenv
+- uses adapter-static with all data backend rerendered for seo.
+- ts types and schemas are nicely separated
+- we use common path resolution using `@/` instead of `$`
 
 ## Stack
 
-- Svelte, miragejs, Typescript, CRUD, RestApi, Tailwindcss, css/scss,
+- Svelte, @sveltejs/kit, miragejs, Typescript, CRUD, RestApi, Tailwindcss, css/scss, Skeleton, Seo Friendly
 
-## Data and Api
+## Common paths
 
+Mock Server: `src/lib/mockServer`
 Static data: `/src/data/stacks.ts`
 Api service: `src/lib/api`
+Store service: `src/stores`
+
+## CRUD
+
+API end points with miragejs
+
+We use api service `src/lib/api` to allow easy adaption to real `/api` end ponts
+
+```sh
+# get all stacks
+(GET) /api/stacks
+# create one stack
+(POST) /api/stack
+# update one stack
+(patch) /api/stack/:id
+# delete one stack
+(delete) /api/stack/:id
+```
+
+## ENV
+
+uses `.env` and `.env.test`
+please rename `.env.example` to `.env`
 
 ## Testing
 
@@ -76,5 +105,7 @@ on windows it should install it under:
 ### Notes
 
 _- The warning about: `baseUrl and/or paths in your tsconfig.json which interferes with SvelteKit` in terminal, i kept baseUrl or intellisense wouldn't work_
+
+- the chromium package was not added to package.json because its too big, for testing please install it and then can run tests.
 
 ### Thank you

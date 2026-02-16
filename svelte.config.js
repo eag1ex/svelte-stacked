@@ -1,12 +1,21 @@
 import { mdsvex } from 'mdsvex';
 import sveltePreprocess from 'svelte-preprocess';
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 import path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			pages: 'build',
+			assets: 'build',
+
+			fallback: '200.html'
+		}),
+		paths: {
+			base: process.env.NODE_ENV === 'production' ? '/stacked' : ''
+		},
+
 		alias: {
 			'@/routes': path.resolve('src/routes'),
 			'@/data': path.resolve('src/data'),

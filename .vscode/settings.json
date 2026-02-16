@@ -1,5 +1,7 @@
 {
 	"files.associations": {
 		"*.css": "tailwindcss"
-	}
+	},
+	// to open live server from this folder not entire app root :)
+	"liveServer.settings.root": "/build"
 }

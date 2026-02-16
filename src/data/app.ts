@@ -1,6 +1,6 @@
 export const APP = {
-	NAME: 'Stacks',
-	TITLE: 'Stacks App',
+	NAME: 'Stacked',
+	TITLE: 'Stacked App',
 	DESC: 'Listing your famous stacks',
 	BY: 'MichaelWorks'
 };
