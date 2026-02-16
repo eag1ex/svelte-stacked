@@ -2,8 +2,8 @@
 	import type { StackApiStatus } from '@/types/api.stacks';
 	import { Status } from '../lib';
 
-	export let selectedStatus: StackApiStatus | null;
-	export let toggle: (status: StackApiStatus) => void;
+	export let selectedStatus: Status | null;
+	export let toggle: (status: Status | null) => void;
 
 	const statuses = [Status.Draft, Status.Published];
 </script>

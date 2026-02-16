@@ -12,13 +12,14 @@
 	import SearchFilter from '@/components/SearchFilter.svelte';
 	import type { StackApi, StackApiStatus } from '@/types/index';
 	import StatusFilter from '@/components/StatusFilter.svelte';
+	import type { Status } from '@/lib/enums.js';
 
 	export let data;
 
 	let stacks: StackApi[] = [];
 	let editingId: number | null = null;
 	let addingNew = false;
-	let selectedStatus: StackApiStatus | null;
+	let selectedStatus: Status | null;
 	let filteredStacks: StackApi[] = [];
 	let searchTerm: string = '';
 	let itemStateLoading: string | null | number;
@@ -83,7 +84,7 @@
 		? filteredStacks.filter((stack) => stack.status === selectedStatus)
 		: filteredStacks;
 
-	function toggle(stat: string): void {
+	function toggle(stat: Status | null): void {
 		selectedStatus = stat as any;
 	}
 </script>
