@@ -1,6 +1,6 @@
 export const appNavigation = [
 	{
-		title: 'Welcome',
+		title: 'Start',
 		pageName: 'landing',
 		slug: '/'
 	},

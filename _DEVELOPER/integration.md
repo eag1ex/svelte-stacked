@@ -55,9 +55,9 @@ npx sv create stacked
 │
 └  You're all set!
 
-(base) vendeta@vendeta:/media/vendeta/data_disk_2/x-workflow/stacked/project$ ^C
-(base) vendeta@vendeta:/media/vendeta/data_disk_2/x-workflow/stacked/project$ npm run ^C
-(base) vendeta@vendeta:/media/vendeta/data_disk_2/x-workflow/stacked/project$ npm i
+(base) /stacked/project$ ^C
+(base) /stacked/project$ npm run ^C
+(base) v/stacked/project$ npm i
 
 > stacked@0.0.1 prepare
 > svelte-kit sync || echo ''
@@ -74,7 +74,7 @@ To address all issues (including breaking changes), run:
   npm audit fix --force
 
 Run `npm audit` for details.
-(base) vendeta@vendeta:/media/vendeta/data_disk_2/x-workflow/stacked/project$ npm run dev
+(base) /stacked/project$ npm run dev
 
 > stacked@0.0.1 dev
 > vite dev

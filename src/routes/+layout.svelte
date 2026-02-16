@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import '../styles/styles.scss';
+	import favicon from '@/assets/favicon.svg';
 	import { pageState, updateTitle } from '@/stores/pageState';
 	import { page } from '$app/stores';
 	import { derived } from 'svelte/store';
@@ -30,16 +31,16 @@
 
 <svelte:head>
 	<title>{APP.TITLE} | {title}</title>
+
 	<meta property="og:title" content={`${APP.TITLE} | ${title}`} />
 	<meta name="description" content={`${APP.DESC} | Build by ${APP.BY}`} />
 	<meta property="og:description" content={`${APP.DESC} | Build by ${APP.BY}`} />
+	<link rel="icon" href={favicon} type="image/svg+xml " />
 </svelte:head>
 
 <AppBar title={APP.NAME} />
 <main class="container mx-auto mt-10 rounded-lg bg-[rgba(255,255,255,0.05)] px-10 py-6 shadow-lg">
-	<!-- Move Tabs to Navigation component -->
 	<Navigation {currentTab} />
-
 	<div class="mx-auto w-full">
 		<slot></slot>
 	</div>

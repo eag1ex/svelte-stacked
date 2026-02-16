@@ -2,6 +2,26 @@
 
 Stack listing app build with Svelte, it allows you to perform all CRUD operations, it runs on mock server `miragejs`
 
+## Start
+
+```sh
+
+npm run dev
+
+## build
+npm run build
+
+## preview after build
+npm run preview
+
+## check code
+npm run lint
+
+## Run tests
+npm run test
+
+```
+
 ## Features
 
 - All crud operations are available: create, read, update, delete
@@ -18,6 +38,10 @@ Stack listing app build with Svelte, it allows you to perform all CRUD operation
 ## Stack
 
 - Svelte, miragejs, Typescript, CRUD, RestApi, Tailwindcss, css/scss,
+
+## Data
+
+Static data live in `/src/data/stacks.ts`
 
 ## Testing
 

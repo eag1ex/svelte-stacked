@@ -10,7 +10,7 @@
 	import StackEdit from '@/components/StackEdit.svelte';
 	import StackView from '@/components/StackView.svelte';
 	import SearchFilter from '@/components/SearchFilter.svelte';
-	import type { StackApi, StackApiStatus } from '@/types/index';
+	import type { StackApi } from '@/types/index';
 	import StatusFilter from '@/components/StatusFilter.svelte';
 	import type { Status } from '@/lib/enums.js';
 

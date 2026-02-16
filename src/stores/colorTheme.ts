@@ -2,8 +2,8 @@ import { writable } from 'svelte/store';
 
 export const theme = writable<'light' | 'dark'>('light');
 
-export const setTheme = (themeColor = 'light', onTheme) => {
-	theme.set(themeColor);
+export const setTheme = (themeColor = 'light', onTheme: any) => {
+	theme.set(themeColor as any);
 	if (typeof onTheme === 'function') {
 		onTheme(themeColor);
 	}
