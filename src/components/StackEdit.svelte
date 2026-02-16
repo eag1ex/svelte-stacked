@@ -142,7 +142,7 @@
 	</div>
 </form>
 
-<style lang="scss">
+<style>
 	.form-actions {
 		position: relative;
 		left: 2px;

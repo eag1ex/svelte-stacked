@@ -1,9 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import '../styles/styles.scss';
-	import { setTheme, sharedState } from '@/stores/index';
 	import { pageState, updateTitle } from '@/stores/pageState';
-	import Header from '@/components/Header.svelte';
 	import { page } from '$app/stores';
 	import { appNavigation } from '@/data/navigation';
 	import { derived } from 'svelte/store';
@@ -12,17 +10,10 @@
 	import { onMount } from 'svelte';
 	import { APP } from '@/data/app';
 	import Navigation from '@/components/Navigation.svelte'; // Import the new Navigation component
+	import AppBar from '@/components/AppBar.svelte';
 
-	let stateData: SharedState = {
-		id: null,
-		data: null
-	};
+	let title: string;
 	const currYear = new Date().getFullYear();
-
-	$: {
-		stateData = $sharedState;
-	}
-
 	let currentTab = derived(page, ($page) => $page.url.pathname);
 
 	const handleTabClick = (slug: string) => {
@@ -33,8 +24,6 @@
 		}
 	};
 
-	let title: string;
-
 	$: {
 		let pathname = $page.url.pathname;
 		updateTitle(pathname);
@@ -42,16 +31,6 @@
 
 	$: {
 		title = $pageState.title;
-	}
-
-	$: {
-		// project theme color
-		const themeColor =
-			typeof localStorage === 'object' ? localStorage.getItem('theme') || 'dark' : 'dark';
-
-		setTheme(themeColor, (val: any) => {
-			typeof document === 'object' && document.documentElement.setAttribute('data-theme', val);
-		});
 	}
 
 	onMount(() => {
@@ -66,9 +45,8 @@
 	<meta property="og:description" content={`${APP.DESC} | Build by ${APP.BY}`} />
 </svelte:head>
 
+<AppBar title={APP.NAME} />
 <main class="container mx-auto mt-10 rounded-lg bg-[rgba(255,255,255,0.05)] px-10 py-6 shadow-lg">
-	<Header {title} />
-
 	<!-- Move Tabs to Navigation component -->
 	<Navigation {currentTab} {handleTabClick} />
 

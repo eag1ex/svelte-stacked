@@ -2,7 +2,7 @@
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import { appNavigation } from '@/data/navigation';
 
-	export let currentTab: string;
+	export let currentTab: any;
 	export let handleTabClick: (slug: string) => void;
 	$: {
 		console.log('currentTab is', $currentTab);
