@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let status: number;
-	export let error: string;
 </script>
 
-<h1>Error</h1>
-<p>Page not found</p>
+<section class="mx-auto mb-20 w-full">
+	<h1 class="mb-2 text-2xl font-bold">Error</h1>
+	<p>Page not found</p>
+</section>

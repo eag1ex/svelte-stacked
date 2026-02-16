@@ -1,17 +1,12 @@
 <script lang="ts">
+	import type { StackApi } from '../types';
 	import StackIcon from './icons/StackIcon.svelte';
 	import Progress from './Progress.svelte';
 
-	export let stack: {
-		id: number;
-		title: string;
-		status: string;
-		author: string;
-		createdAt: string;
-	};
+	export let stack: StackApi;
 	export let updating: boolean = false;
-	export let onEdit: Function;
-	export let onDelete: Function;
+	export let onEdit: MyFunction;
+	export let onDelete: MyFunction;
 </script>
 
 <div class={`stack-view-item flex items-center p-4 transition-colors stack-view-item-${stack.id}`}>

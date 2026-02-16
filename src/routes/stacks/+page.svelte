@@ -7,12 +7,10 @@
 		stackState,
 		dataLoaded
 	} from '@/stores/index';
-
 	import StackEdit from '@/components/StackEdit.svelte';
 	import StackView from '@/components/StackView.svelte';
 	import SearchFilter from '@/components/SearchFilter.svelte';
-	import type { LoadState, StackApi, StackApiStatus } from '@/types/index';
-
+	import type { StackApi, StackApiStatus } from '@/types/index';
 	import StatusFilter from '@/components/StatusFilter.svelte';
 
 	export let data;
@@ -23,21 +21,20 @@
 	let selectedStatus: StackApiStatus | null;
 	let filteredStacks: StackApi[] = [];
 	let searchTerm: string = '';
-	// let itemState: { id: number | string | null; state: LoadState; _new?: boolean } | null;
-	let itemStateLoading: string | null;
+	let itemStateLoading: string | null | number;
 
 	const handleSearch = (term: string) => {
 		searchTerm = term;
 	};
 
-	const handleUpdate = (id, updatedStack) => {
+	const handleUpdate = (id: any, updatedStack: any) => {
 		updateStackState(id, updatedStack, () => {
 			editingId = null;
 			addingNew = false;
 		});
 	};
 
-	const handleNew = (id, updatedStack) => {
+	const handleNew = (id: any, updatedStack: any) => {
 		addStackState(updatedStack, () => {
 			editingId = null;
 			addingNew = false;
@@ -49,7 +46,7 @@
 		addingNew = false;
 	};
 
-	const onDelete = (id) => {
+	const onDelete = (id: any) => {
 		deleteStackState(id, () => {
 			editingId = null;
 			addingNew = false;
@@ -67,7 +64,7 @@
 	};
 
 	$: itemStateLoading =
-		$stackState?.state === 'loading' ? ($stackState._new ? 'new' : $stackState.id) : null;
+		$stackState?.state === 'loading' ? ($stackState._new ? 'new' : ($stackState.id as any)) : null;
 	$: if (data?.stacks && !$stackFormStore.length && !$dataLoaded) {
 		stackFormStore.set(data?.stacks);
 		dataLoaded.set(true);
@@ -87,7 +84,7 @@
 		: filteredStacks;
 
 	function toggle(stat: string): void {
-		selectedStatus = stat;
+		selectedStatus = stat as any;
 	}
 </script>
 

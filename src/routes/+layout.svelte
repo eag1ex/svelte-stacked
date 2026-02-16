@@ -3,9 +3,7 @@
 	import '../styles/styles.scss';
 	import { pageState, updateTitle } from '@/stores/pageState';
 	import { page } from '$app/stores';
-	import { appNavigation } from '@/data/navigation';
 	import { derived } from 'svelte/store';
-	import { goto } from '$app/navigation';
 	import { createMockServer } from '@/lib/mockServer';
 	import { onMount } from 'svelte';
 	import { APP } from '@/data/app';
@@ -15,14 +13,6 @@
 	let title: string;
 	const currYear = new Date().getFullYear();
 	let currentTab = derived(page, ($page) => $page.url.pathname);
-
-	const handleTabClick = (slug: string) => {
-		if (appNavigation.map((n) => n.slug).includes(slug)) {
-			goto(slug);
-		} else {
-			goto('/404');
-		}
-	};
 
 	$: {
 		let pathname = $page.url.pathname;
@@ -48,7 +38,7 @@
 <AppBar title={APP.NAME} />
 <main class="container mx-auto mt-10 rounded-lg bg-[rgba(255,255,255,0.05)] px-10 py-6 shadow-lg">
 	<!-- Move Tabs to Navigation component -->
-	<Navigation {currentTab} {handleTabClick} />
+	<Navigation {currentTab} />
 
 	<div class="mx-auto w-full">
 		<slot></slot>

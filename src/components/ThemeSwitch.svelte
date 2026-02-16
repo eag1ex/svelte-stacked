@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { setTheme, toggleTheme, theme } from '@/stores/colorTheme';
+	import { onMount } from 'svelte';
 	export let color: string = 'var(--text-color)';
 	let reversed = true;
 	const tootle = () => toggleTheme();
@@ -12,15 +13,16 @@
 			reversed = false;
 		}
 	}
-	$: {
+	onMount(() => {
 		// project theme color
 		const themeColor =
 			typeof localStorage === 'object' ? localStorage.getItem('theme') || 'dark' : 'dark';
 
 		setTheme(themeColor, (val: any) => {
+			//eslint-disable-next-line  @typescript-eslint/no-unused-expressions
 			typeof document === 'object' && document.documentElement.setAttribute('data-theme', val);
 		});
-	}
+	});
 </script>
 
 <button type="button" on:click={tootle}>

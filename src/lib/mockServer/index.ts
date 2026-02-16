@@ -27,7 +27,7 @@ export function createMockServer() {
 		serializers: {
 			application: RestSerializer
 		},
-		//logging: false,
+
 		models: {
 			stack: Model.extend<Partial<StackApi>>({})
 		},
@@ -70,12 +70,13 @@ export function createMockServer() {
 				const { id } = request.params;
 				const attrs = JSON.parse(request.requestBody) as Partial<StackApi>;
 				const stack = schema.find('stack', id);
+
 				// make sure not manipulation from client
 				attrs.createdAt = stack?.createdAt;
 
 				if (stack) {
 					const updated = stack.update(attrs);
-					return updated;
+					return updated as any;
 				} else {
 					return new Response(404, {}, { error: ErrorType.STACK_NOT_FOUND });
 				}

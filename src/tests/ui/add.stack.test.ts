@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { createMockServer } from '../../lib/mockServer';
 import { Server, type Registry } from 'miragejs';
 import type {

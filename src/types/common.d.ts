@@ -1,5 +1,4 @@
-
 export enum Status {
-  Draft = 'Draft',
-  Published = 'Published',
+	Draft = 'Draft',
+	Published = 'Published'
 }

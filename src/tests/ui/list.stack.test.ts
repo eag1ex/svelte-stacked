@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { render } from '@testing-library/svelte';
 import { expect, test } from 'vitest';
 import StackView from '@/components/StackView.svelte';

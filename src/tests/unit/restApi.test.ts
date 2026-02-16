@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { createMockServer } from '../../lib/mockServer';
 import { getStacks } from '../../lib/api/index';

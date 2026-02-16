@@ -3,9 +3,10 @@
 	import Progress from './Progress.svelte';
 	import { generateUniqueId, getCurrentISODate } from '@/lib/utils';
 	import StackIcon from './icons/StackIcon.svelte';
+	import type { StackApi } from '@/types/api.stacks';
 
-	export let stack = {
-		id: null,
+	export let stack: StackApi = {
+		id: '',
 		title: '',
 		status: Status.Draft,
 		author: '',
@@ -15,9 +16,9 @@
 	export let mode: 'new' | 'edit' = 'edit';
 	export let updating: boolean = false;
 
-	export let onUpdate: Function;
-	export let onCancel: Function;
-	export let onDelete: Function;
+	export let onUpdate: MyFunction;
+	export let onCancel: MyFunction;
+	export let onDelete: MyFunction;
 
 	let title = stack.title;
 	let status = stack.status || Status.Draft;
