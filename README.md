@@ -9,6 +9,8 @@ Stack listing app build with Svelte, it allows you to perform all CRUD operation
 
 ## Start
 
+Rename `.env.example` to `.env`
+
 ```sh
 
 ## install all deps
@@ -28,6 +30,14 @@ npm run lint
 ## Run tests
 npm run test
 
+```
+
+## Build environment
+
+Rename `.env.example` to `.env`
+
+```sh
+npm run build
 ```
 
 ## Features
