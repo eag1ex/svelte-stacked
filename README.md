@@ -55,7 +55,7 @@ npm run build
 - We use Tailwindcss with structured layers
 - Good separation of concerns (SOC)
 - State management integrated with service api
-- Passing tests
+- Passing UNIT and UI tests
 - tslint and prettier clean and valid
 - mock API endpoints with miragejs
 - SvelteKit integration

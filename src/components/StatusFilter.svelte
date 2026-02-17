@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { StackApiStatus } from '@/types/api.stacks';
 	import { Status } from '../lib';
 
 	export let selectedStatus: Status | null;

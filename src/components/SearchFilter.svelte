@@ -5,24 +5,19 @@
 	let searchTerm = '';
 
 	const handleSearch = () => {
-		onSearch(searchTerm); // Call the provided callback with the search term
+		onSearch(searchTerm);
 	};
 
-	// Handle keyboard shortcuts (e.g., press "Ctrl + F" for focus)
 	const handleKeydown = (e: KeyboardEvent) => {
 		if (e.ctrlKey && e.key === 'f') {
-			// Focus on search input when "Ctrl + F" is pressed
 			e.preventDefault();
 			document.getElementById('searchInput')?.focus();
 		}
 	};
 
-	// Listen for keyboard events
 	if (typeof window === 'object') {
 		window.addEventListener('keydown', handleKeydown);
 	}
-
-	// Cleanup event listener when component is destroyed
 
 	onDestroy(() => {
 		if (typeof window === 'object') {
