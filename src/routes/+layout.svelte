@@ -9,7 +9,7 @@
 	import { APP } from '@/data/app';
 	import Navigation from '@/components/Navigation.svelte';
 	import AppBar from '@/components/AppBar.svelte';
-
+	import { base } from '$app/paths';
 	let title: string;
 	const currYear = new Date().getFullYear();
 	let currentTab = derived(page, ($page) => $page.route.id);
@@ -34,7 +34,7 @@
 	<meta property="og:title" content={`${APP.TITLE} | ${title}`} />
 	<meta name="description" content={`${APP.DESC} | Build by ${APP.BY}`} />
 	<meta property="og:description" content={`${APP.DESC} | Build by ${APP.BY}`} />
-	<link rel="icon" href={'/favicon.svg'} type="image/svg+xml " />
+	<link rel="icon" href="{base}/favicon.svg" type="image/svg+xml " />
 </svelte:head>
 
 <AppBar title={APP.NAME} />
