@@ -17,15 +17,16 @@ const config = {
 	kit: {
 		//appDir: '_app',
 		adapter: adapter({
-			// adapter-static
-			pages: 'docs', // for github
-			assets: 'docs' // for github
-			//	fallback: '200.html' // no difference
+			pages: 'build',
+			assets: 'build'
 		}),
 		paths: {
-			// for prod  process.env.BASE_PATH ===svelte-stacked
-			base: process.env.NODE_ENV === 'production' ? '/' + process.env.BASE_PATH : ''
-			//	assets: ''
+			base:
+				process.env.NODE_ENV === 'production'
+					? process.env.BASE_PATH
+						? '/' + process.env.BASE_PATH || ''
+						: ''
+					: ''
 		},
 
 		alias: {
@@ -34,7 +35,6 @@ const config = {
 			'@/types': path.resolve('src/types'),
 			'@/components': path.resolve('src/components'),
 			'@/stores': path.resolve('src/stores'),
-			'@/assets': path.resolve('src/lib/assets'),
 			'@/lib': path.resolve('src/lib')
 		}
 	},

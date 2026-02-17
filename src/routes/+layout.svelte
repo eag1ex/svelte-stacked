@@ -1,20 +1,18 @@
 <script lang="ts">
 	import './layout.css';
 	import '../styles/styles.scss';
-	import favicon from '@/assets/favicon.svg';
 	import { pageState, updateTitle } from '@/stores/pageState';
 	import { page } from '$app/stores';
 	import { derived } from 'svelte/store';
 	import { createMockServer } from '@/lib/mockServer';
 	import { onMount } from 'svelte';
 	import { APP } from '@/data/app';
-	import Navigation from '@/components/Navigation.svelte'; // Import the new Navigation component
+	import Navigation from '@/components/Navigation.svelte';
 	import AppBar from '@/components/AppBar.svelte';
 
 	let title: string;
 	const currYear = new Date().getFullYear();
 	let currentTab = derived(page, ($page) => $page.route.id);
-	//let currentTab = derived(page, ($page) => $page.url.pathname);
 
 	$: {
 		let pathname = $page.url.pathname;
@@ -36,7 +34,7 @@
 	<meta property="og:title" content={`${APP.TITLE} | ${title}`} />
 	<meta name="description" content={`${APP.DESC} | Build by ${APP.BY}`} />
 	<meta property="og:description" content={`${APP.DESC} | Build by ${APP.BY}`} />
-	<link rel="icon" href={favicon} type="image/svg+xml " />
+	<link rel="icon" href={'/favicon.svg'} type="image/svg+xml " />
 </svelte:head>
 
 <AppBar title={APP.NAME} />

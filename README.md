@@ -4,6 +4,12 @@ Stacked - application that lists stacks, build with Svelte, allowing you to perf
 
 Static web app with hydrated backend, seo friendly.
 
+## Demo
+
+Available on github pages :[Stacked](https://eag1ex.github.io/svelte-stacked/)
+
+git repo: https://github.com/eag1ex/svelte-stacked.git
+
 ## Requirements
 
 - need Node version ^20.19.0
@@ -107,5 +113,6 @@ on windows it should install it under:
 _- The warning about: `baseUrl and/or paths in your tsconfig.json which interferes with SvelteKit` in terminal, i kept baseUrl or intellisense wouldn't work_
 
 - the chromium package was not added to package.json because its too big, for testing please install it and then can run tests.
+- the project is not fully optimized for mobile yet - will do this when time allows, thank you
 
 ### Thank you
