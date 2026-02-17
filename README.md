@@ -113,9 +113,8 @@ on windows when installed can be found under:
 
 ### Notes
 
-_- The warning about: `baseUrl and/or paths in your tsconfig.json which interferes with SvelteKit` in terminal, i kept baseUrl or intellisense wouldn't work_
-
-- the chromium package was not added to package.json because its too big, for testing please install it and then can run tests.
+- _The warning about: `baseUrl and/or paths in your tsconfig.json which interferes with SvelteKit` in terminal, i kept baseUrl or intellisense wouldn't work_
+  - the chromium package was not added to package.json because its too big, for testing please install it and then can run tests.
 - the project is not fully optimized for mobile yet - will do this when time allows, thank you
 
 <br/>
