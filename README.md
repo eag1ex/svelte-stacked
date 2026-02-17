@@ -64,7 +64,7 @@ npm run build
 - Environment ready with dotenv
 - Uses adapter-static with all data backend pre-rendered for seo.
 - TS types and schemas are nicely separated
-- Use common path resolution using `@/` instead of `$`
+- Common path resolution using `@/` instead of `$`
 - Production ready
 
 ## Stack
