@@ -115,4 +115,6 @@ _- The warning about: `baseUrl and/or paths in your tsconfig.json which interfer
 - the chromium package was not added to package.json because its too big, for testing please install it and then can run tests.
 - the project is not fully optimized for mobile yet - will do this when time allows, thank you
 
+ps: readme.md was NOT ai generated.
+
 ### Thank you
