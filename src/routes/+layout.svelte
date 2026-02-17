@@ -32,6 +32,7 @@
 	<title>{APP.TITLE} | {title}</title>
 
 	<meta property="og:title" content={`${APP.TITLE} | ${title}`} />
+	<meta name="robots" content="noindex, nofollow" />
 	<meta name="description" content={`${APP.DESC} | Build by ${APP.BY}`} />
 	<meta property="og:description" content={`${APP.DESC} | Build by ${APP.BY}`} />
 	<link rel="icon" href="{base}/favicon.svg" type="image/svg+xml " />
