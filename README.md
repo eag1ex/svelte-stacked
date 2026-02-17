@@ -4,6 +4,12 @@ Stacked - application that lists stacks, build with Svelte, allowing you to perf
 
 Static web app with hydrated backend, seo friendly.
 
+## Demo
+
+Available on github pages :[Stacked](https://eag1ex.github.io/svelte-stacked/)
+
+git repo: https://github.com/eag1ex/svelte-stacked.git
+
 ## Requirements
 
 - need Node version ^20.19.0
