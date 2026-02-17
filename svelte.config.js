@@ -17,8 +17,8 @@ const config = {
 	kit: {
 		//appDir: '_app',
 		adapter: adapter({
-			pages: 'build',
-			assets: 'build'
+			pages: 'docs',
+			assets: 'docs'
 		}),
 		paths: {
 			base:
