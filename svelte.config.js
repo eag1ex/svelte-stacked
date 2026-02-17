@@ -34,7 +34,6 @@ const config = {
 			'@/types': path.resolve('src/types'),
 			'@/components': path.resolve('src/components'),
 			'@/stores': path.resolve('src/stores'),
-			'@/assets': path.resolve('src/lib/assets'),
 			'@/lib': path.resolve('src/lib')
 		}
 	},
