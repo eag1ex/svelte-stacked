@@ -108,7 +108,7 @@ Running tests with miragejs mock server requires jsdom with headless browser:
 
 > `/$ npx playwright install chromium`
 
-on windows it should install it under:
+on windows when installed can be found under:
 `C:\Users\<username>\AppData\Local\ms-playwright\chromium-<version>\`
 
 ### Notes
