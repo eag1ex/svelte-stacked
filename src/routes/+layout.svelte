@@ -34,7 +34,7 @@
 	<meta property="og:title" content={`${APP.TITLE} | ${title}`} />
 	<meta name="description" content={`${APP.DESC} | Build by ${APP.BY}`} />
 	<meta property="og:description" content={`${APP.DESC} | Build by ${APP.BY}`} />
-	<link rel="icon" href={'/static/favicon.svg'} type="image/svg+xml " />
+	<link rel="icon" href={'/favicon.svg'} type="image/svg+xml " />
 </svelte:head>
 
 <AppBar title={APP.NAME} />
