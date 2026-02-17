@@ -12,8 +12,9 @@ git repo: https://github.com/eag1ex/svelte-stacked.git
 
 ## Requirements
 
-- need Node version ^20.19.0
+- need Node version ^20.19.0 `nvm use 20.19`
 - need to install chromium for testing
+- rename `.env.example` to `.env`
 
 ## Start
 
@@ -24,6 +25,7 @@ Rename `.env.example` to `.env`
 ## install all deps
 npm install
 
+## run local project
 npm run dev
 
 ## build
@@ -52,17 +54,18 @@ npm run build
 
 - All crud operations are available: create, read, update, delete
 - Color theme switching
-- We use Tailwindcss with structured layers
+- Uses Tailwindcss with structured layers
 - Good separation of concerns (SOC)
 - State management integrated with service api
 - Passing UNIT and UI tests
-- tslint and prettier clean and valid
-- mock API endpoints with miragejs
+- Tslint and prettier clean and valid
+- Mock API endpoints with miragejs
 - SvelteKit integration
-- environment ready with dotenv
-- uses adapter-static with all data backend rerendered for seo.
-- ts types and schemas are nicely separated
-- we use common path resolution using `@/` instead of `$`
+- Environment ready with dotenv
+- Uses adapter-static with all data backend rerendered for seo.
+- TS types and schemas are nicely separated
+- Use common path resolution using `@/` instead of `$`
+- Production ready
 
 ## Stack
 
@@ -70,10 +73,10 @@ npm run build
 
 ## Common paths
 
-Mock Server: `src/lib/mockServer`
-Static data: `/src/data/stacks.ts`
-Api service: `src/lib/api`
-Store service: `src/stores`
+- Mock Server: `src/lib/mockServer`
+- Static data: `/src/data/stacks.ts`
+- Api service: `src/lib/api`
+- Store service: `src/stores`
 
 ## CRUD
 
@@ -115,6 +118,7 @@ _- The warning about: `baseUrl and/or paths in your tsconfig.json which interfer
 - the chromium package was not added to package.json because its too big, for testing please install it and then can run tests.
 - the project is not fully optimized for mobile yet - will do this when time allows, thank you
 
+<br/>
 ps: readme.md was NOT ai generated.
 
 ### Thank you
