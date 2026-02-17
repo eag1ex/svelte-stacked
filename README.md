@@ -6,7 +6,7 @@ Static web app with hydrated backend, seo friendly.
 
 ## Demo
 
-Available on github pages :[Stacked](https://eag1ex.github.io/svelte-stacked/)
+Available on github pages: [Stacked](https://eag1ex.github.io/svelte-stacked/)
 
 git repo: https://github.com/eag1ex/svelte-stacked.git
 
