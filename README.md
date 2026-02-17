@@ -13,7 +13,7 @@ git repo: https://github.com/eag1ex/svelte-stacked.git
 ## Requirements
 
 - need Node version ^20.19.0 `nvm use 20.19`
-- need to install chromium for testing
+- need to install chromium for testing `npx playwright install chromium`
 - rename `.env.example` to `.env`
 
 ## Start
