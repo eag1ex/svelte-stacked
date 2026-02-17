@@ -13,7 +13,8 @@
 
 	let title: string;
 	const currYear = new Date().getFullYear();
-	let currentTab = derived(page, ($page) => $page.url.pathname);
+	let currentTab = derived(page, ($page) => $page.route.id);
+	//let currentTab = derived(page, ($page) => $page.url.pathname);
 
 	$: {
 		let pathname = $page.url.pathname;

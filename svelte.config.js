@@ -15,15 +15,17 @@ try {
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		// appDir: '_app',
+		//appDir: '_app',
 		adapter: adapter({
+			// adapter-static
 			pages: 'docs', // for github
 			assets: 'docs' // for github
-			//	fallback: '200.html'
+			//	fallback: '200.html' // no difference
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/' + process.env.BASE_PATH : '',
-			assets: ''
+			// for prod  process.env.BASE_PATH ===svelte-stacked
+			base: process.env.NODE_ENV === 'production' ? '/' + process.env.BASE_PATH : ''
+			//	assets: ''
 		},
 
 		alias: {

@@ -1,1 +1,0 @@
-import{a as r,f as a}from"../chunks/BI_d0DeL.js";import"../chunks/DjSpb7oq.js";var n=a('<section class="mx-auto mb-20 w-full"><h1 class="mb-2 text-2xl font-bold">Error</h1> <p>Page not found</p></section>');function m(o){var t=n();r(o,t)}export{m as component};
